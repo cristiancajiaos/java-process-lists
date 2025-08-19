@@ -17,4 +17,16 @@ public class StringListController {
   public List<String> filterByStartWithA(@RequestBody List<String> stringList) {
     return stringList.stream().filter(s -> s.toLowerCase().startsWith("a")).collect(Collectors.toList());
   }
+
+  @PostMapping("/not-spam")
+  @ResponseBody
+  public List<String> filterListByNotSpam(@RequestBody List<String> stringList) {
+    return stringList.stream().filter(s -> !(s.toLowerCase().contains("spam"))).collect(Collectors.toList());
+  }
+
+  @PostMapping("/foo")
+  @ResponseBody
+  public List<String> filterNotSpam(@RequestBody List<String> stringList) {
+    return stringList.stream().filter(s -> !(s.toLowerCase().contains("spam"))).collect(Collectors.toList());
+  }
 }
