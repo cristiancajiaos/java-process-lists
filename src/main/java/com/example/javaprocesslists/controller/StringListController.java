@@ -24,9 +24,15 @@ public class StringListController {
     return stringList.stream().filter(s -> !(s.toLowerCase().contains("spam"))).collect(Collectors.toList());
   }
 
+  @PostMapping("/replace-spam-up")
+  @ResponseBody
+  public List<String> replaceSpamAndUp(@RequestBody List<String> stringList) {
+    return stringList.stream().map(s -> s.replaceAll("spam", "not spam")).map(s -> s.toUpperCase()).collect(Collectors.toList());
+  }
+
   @PostMapping("/foo")
   @ResponseBody
-  public List<String> filterNotSpam(@RequestBody List<String> stringList) {
-    return stringList.stream().filter(s -> !(s.toLowerCase().contains("spam"))).collect(Collectors.toList());
+  public List<String> foo(@RequestBody List<String> stringList) {
+    return stringList.stream().map(s -> s.replaceAll("spam", "not spam")).map(s -> s.toUpperCase()).collect(Collectors.toList());
   }
 }
