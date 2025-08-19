@@ -1,5 +1,6 @@
 package com.example.javaprocesslists.controller;
 
+import com.example.javaprocesslists.entity.ListNumber;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,14 @@ public class NumbersListController {
   @PostMapping("/double")
   @ResponseBody
   public List<Long> doubleNumbers(@RequestBody List<Long> numbers) {
-    return numbers.stream().map(this::doubleNumber).collect(Collectors.toList());
+    return numbers.stream().map(n -> n * 2).collect(Collectors.toList());
+  }
+
+  @PostMapping("/n-times")
+  @ResponseBody
+  public List<Long> nTimes(@RequestBody ListNumber listNumber) {
+    return listNumber.getNumbersList().stream().map(n -> n * listNumber.getnTimes()).collect(
+        Collectors.toList());
   }
 
   @PostMapping("/only-even")
@@ -23,9 +31,4 @@ public class NumbersListController {
   public List<Long> recoverOnlyEvenNumbers(@RequestBody List<Long> numbers) {
     return numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());
   }
-
-  private Long doubleNumber(Long number) {
-    return number * 2;
-  }
-
 }
