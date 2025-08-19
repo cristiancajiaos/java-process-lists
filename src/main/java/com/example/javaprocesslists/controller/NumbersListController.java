@@ -31,4 +31,16 @@ public class NumbersListController {
   public List<Long> recoverOnlyEvenNumbers(@RequestBody List<Long> numbers) {
     return numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());
   }
+
+  @PostMapping("/sorted")
+  @ResponseBody
+  public List<Long> sortListNumbers(@RequestBody List<Long> numbers) {
+    return numbers.stream().sorted().collect(Collectors.toList());
+  }
+
+  @PostMapping("/foo")
+  @ResponseBody
+  public List<Long> foo(@RequestBody List<Long> numbers) {
+    return numbers.stream().sorted().collect(Collectors.toList());
+  }
 }
